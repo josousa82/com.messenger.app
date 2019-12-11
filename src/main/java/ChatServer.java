@@ -5,15 +5,18 @@ import java.util.Vector;
 
 public class ChatServer   {
 
-   public static Vector clientSocket;
-   public static Vector loginName;
+    // apparently a vector is used due to the synchronization capacity
+    // review and refactor the code, consider using ArrayList
+
+    private Vector clientSocket;
+    private Vector loginNames;
 
     public ChatServer() throws IOException{
 
         ServerSocket server = new ServerSocket(5217);
 
         clientSocket = new Vector();
-        loginName = new Vector();
+        loginNames = new Vector();
 
         while (true){
             Socket client = server.accept();
@@ -21,4 +24,18 @@ public class ChatServer   {
 
         }
     }
+
+    public void addNewLoginName(String loginName){
+        loginNames.add(loginName);
+    }
+
+    public  Vector getClientSocket() {
+        return new Vector(clientSocket);
+    }
+
+    public Vector getLoginNames() {
+        return new Vector(loginNames);
+    }
+
+
 }
