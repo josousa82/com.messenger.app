@@ -3,39 +3,25 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
-public class ChatServer   {
+public class ChatServer  extends  Thread{
 
     // apparently a vector is used due to the synchronization capacity
     // review and refactor the code, consider using ArrayList
 
-    private Vector clientSocket;
-    private Vector loginNames;
+     static Vector clientSockets;
+     static Vector loginNames;
 
     public ChatServer() throws IOException{
 
         ServerSocket server = new ServerSocket(5217);
 
-        clientSocket = new Vector();
+        clientSockets = new Vector();
         loginNames = new Vector();
 
         while (true){
             Socket client = server.accept();
-            AcceptClient acceptClient  = new AcceptClient();
+            AcceptClient acceptClient  = new AcceptClient(client);
 
         }
     }
-
-    public void addNewLoginName(String loginName){
-        loginNames.add(loginName);
-    }
-
-    public  Vector getClientSocket() {
-        return new Vector(clientSocket);
-    }
-
-    public Vector getLoginNames() {
-        return new Vector(loginNames);
-    }
-
-
 }

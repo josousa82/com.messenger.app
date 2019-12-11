@@ -17,6 +17,16 @@ public class AcceptClient extends Thread{
         dout = new DataOutputStream(clientSocket.getOutputStream());
 
         String loginName = din.readUTF();
+        ChatServer.loginNames.add(loginName);
 
+        start();
+
+    }
+
+    @Override
+    public void run() {
+        while(true){
+
+        }
     }
 }
