@@ -49,15 +49,13 @@ public class ChatServer  extends  Thread {
 
             String loginName = din.readUTF();
 
-            ChatServer.loginNames.add(loginName);
+            loginNames.add(loginName);
             clientSockets.add(clientSocket);
             start();
 
         }
 
-        private void msgControl(){
 
-        }
 
         @Override
         public void run() {

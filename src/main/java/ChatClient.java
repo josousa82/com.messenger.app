@@ -28,8 +28,8 @@ public class ChatClient extends JFrame implements Runnable {
         super(loginName);
         this.loginName = loginName;
 
-        textArea = new JTextArea(18, 50);
-        textField = new JTextField(50);
+        textArea = new JTextArea(18, 30);
+        textField = new JTextField(20);
 
         send = new JButton("Send");
         logout = new JButton("Logout");
@@ -75,15 +75,29 @@ public class ChatClient extends JFrame implements Runnable {
 
         setSize(500,400);
 
-        JPanel panel = new JPanel();
-               panel.add(new JScrollPane(textArea));
-               panel.add(textField);
-               panel.add(send);
-               panel.add(logout);
+        JFrame jframe = new JFrame();
+               jframe.getContentPane().setLayout(new BorderLayout());
+               jframe.setSize(600  , 400);
 
-               add(panel);
+        JPanel panel1 = new JPanel();
+               panel1.setPreferredSize(new Dimension(400, 300));
+               panel1.setBackground(Color.LIGHT_GRAY);
+               panel1.add(new JScrollPane(textArea));
 
-               setVisible(true);
+               JPanel panelButton = new JPanel();
+               panelButton.setBackground(Color.LIGHT_GRAY);
+               panelButton.add(textField);
+               panelButton.add(send);
+               panelButton.add(logout);
+
+               jframe.getContentPane().add(panel1, BorderLayout.PAGE_START);
+               jframe.getContentPane().add(panelButton, BorderLayout.PAGE_END);
+
+               // add(panel);
+                jframe.pack();
+               jframe.setVisible(true);
+
+               jframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     @Override
