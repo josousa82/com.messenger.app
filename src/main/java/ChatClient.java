@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,9 @@ public class ChatClient extends JFrame implements Runnable {
     JTextField textField;
     JButton send;
     JButton logout;
+    JFrame jframe;
+    JPanel panel1;
+    JPanel panel2;
 
     Thread thread;
 
@@ -32,7 +36,9 @@ public class ChatClient extends JFrame implements Runnable {
         textField = new JTextField(20);
 
         send = new JButton("Send");
+        send.updateUI();
         logout = new JButton("Logout");
+        logout.updateUI();
 
         send.addActionListener(new ActionListener() {
 
@@ -75,28 +81,30 @@ public class ChatClient extends JFrame implements Runnable {
 
         setSize(500,400);
 
-        JFrame jframe = new JFrame();
+               jframe = new JFrame();
                jframe.getContentPane().setLayout(new BorderLayout());
                jframe.setSize(600  , 400);
 
-        JPanel panel1 = new JPanel();
+               panel1 = new JPanel();
                panel1.setPreferredSize(new Dimension(400, 300));
                panel1.setBackground(Color.LIGHT_GRAY);
                panel1.add(new JScrollPane(textArea));
 
-               JPanel panelButton = new JPanel();
-               panelButton.setBackground(Color.LIGHT_GRAY);
-               panelButton.add(textField);
-               panelButton.add(send);
-               panelButton.add(logout);
+               panel2 = new JPanel();
+               panel2.setBackground(Color.LIGHT_GRAY);
+
+
+
+               panel2.add(textField);
+               panel2.add(send);
+               panel2.add(logout);
 
                jframe.getContentPane().add(panel1, BorderLayout.PAGE_START);
-               jframe.getContentPane().add(panelButton, BorderLayout.PAGE_END);
+               jframe.getContentPane().add(panel2, BorderLayout.PAGE_END);
 
                // add(panel);
-                jframe.pack();
+               jframe.pack();
                jframe.setVisible(true);
-
                jframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -104,7 +112,9 @@ public class ChatClient extends JFrame implements Runnable {
     public void run() {
         while (true){
             try {
+
                 textArea.append("\n" + din.readUTF());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
